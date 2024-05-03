@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Задание 4</title>
+</head>
+<body>
+	<p>
+        <h1>Задание 4</h1>
+        <!-- 
+        Создайте объект – информация о покупателе (не менее 5 строк) и выведите три из них.
+        Создайте объекты пользователи, заказы и рестораны с соответствующими значениями.
+        Организуйте вывод информации из объектов по условию.
+        При помощи функции-конструктора и оператора "new" создайте функцию, выводящую имена вашей группы.
+        Используя конструктор, создайте объект – студент.
+        Передайте конструктору параметры, определяющие, как создавать объект, и что в него записывать.
+        -->
+        <p id="customerInfoOutput"></p>
+        <p id="orderInfoOutput"></p>
+        <p id="studentsInfoOutput"></p>
+        <p id="studentInfoOutput"></p>
+             
+        <script>
+            let customerInfo = {
+                name: "Мечеслав Бойко",
+                phone: "+7(980)222-32-02",
+                address: "г. Москва, ул. Ленина, д. 1, кв. 1",
+                email: "boyko@mail.su",
+                age: 45
+            };
+
+            // Получаем ссылку на элемент, в который будем выводить информацию
+            let outputElement = document.getElementById('customerInfoOutput');
+
+            // Формируем строку с информацией о покупателе
+            let customerInfoString = `Имя: ${customerInfo.name}, Телефон: ${customerInfo.phone}, Email: ${customerInfo.email}`;
+
+            // Устанавливаем содержимое элемента
+            outputElement.textContent = customerInfoString;
+
+            // Создаем объекты пользователей
+            let users = [
+                { id: 1, name: "Иван Иванов", email: "ivan@example.com" },
+                { id: 2, name: "Петр Петров", email: "petr@example.com" },
+                { id: 3, name: "Сергей Сергеев", email: "sergey@example.com" }
+            ];
+
+            // Создаем объекты заказов
+            let orders = [
+                { id: 1, userId: 1, items: ["Пицца", "Кола"] },
+                { id: 2, userId: 2, items: ["Бургер", "Сок"] },
+                { id: 3, userId: 3, items: ["Салат", "Вода"] }
+            ];
+
+            // Создаем объекты ресторанов
+            let restaurants = [
+                { id: 1, name: "Ресторан Пиццы", address: "г. Москва, ул. Пиццы, д. 1" },
+                { id: 2, name: "Бургер Шоп", address: "г. Москва, ул. Бургеров, д. 2" },
+                { id: 3, name: "Салаты и Соки", address: "г. Москва, ул. Соков, д. 3" }
+            ];
+
+            function displayOrderInfo(userId, orderId) {
+                let user = users.find(user => user.id === userId);
+                let order = orders.find(order => order.id === orderId);
+                let restaurant = restaurants.find(restaurant => restaurant.id === orderId);
+
+                if (!user || !order || !restaurant) {
+                    console.log("Не удалось найти информацию о заказе.");
+                    return;
+                }
+
+                let orderInfo = `
+                    Пользователь: ${user.name},
+                    Заказ: ${order.items.join(', ')},
+                    Ресторан: ${restaurant.name},
+                    Адрес: ${restaurant.address}
+                `;
+
+                document.getElementById('orderInfoOutput').textContent = orderInfo;
+            }
+            displayOrderInfo(1, 1);
+
+            // Функция-конструктор для создания объектов группы
+            function GroupMember(name) {
+                this.name = name;
+            }
+
+            // Создаем экземпляры для каждого члена группы
+            let members = [
+                new GroupMember("Абдусалимзода Искандар"),
+                new GroupMember("Авсейцева Дарья Алексеевна"),
+                new GroupMember("Денисов Иван Евгеньевич"),
+                new GroupMember("Джилавян Арман Каренович"),
+                new GroupMember("Дмитриченко Алиса Евгеньевна"),
+                new GroupMember("Дубошей Дмитрий Олегович"),
+                new GroupMember("Ионов Илья Дмитриевич"),
+                new GroupMember("Кораева Ольга Георгиевна"),
+                new GroupMember("Корлотяну Аркадий Андреевич"),
+                new GroupMember("Кулаков Сергей Андреевич")
+            ];
+
+            // Функция для вывода имен членов группы в элемент с id "studentsInfoOutput"
+            function displayGroupNames() {
+                let names = members.map(member => member.name).join(', ');
+                document.getElementById('studentsInfoOutput').textContent = names;
+            }
+
+            // Вызываем функцию для вывода имен
+            displayGroupNames();
+
+            // Функция-конструктор для создания объектов студентов
+            function Student(firstName, lastName, birthYear, specialty) {
+                this.firstName = firstName;
+                this.lastName = lastName;
+                this.birthYear = birthYear;
+                this.specialty = specialty;
+            }
+
+            // Создаем экземпляр студента
+            let student = new Student("Иван", "Иванов", 2000, "Информатика");
+
+            // Функция для вывода информации о студенте в элемент с id "studentInfoOutput"
+            function displayStudentInfo(student) {
+                let studentInfo = `
+                    Имя: ${student.firstName} ${student.lastName},
+                    Год рождения: ${student.birthYear},
+                    Специальность: ${student.specialty}
+                `;
+                document.getElementById('studentInfoOutput').textContent = studentInfo;
+            }
+
+            // Вызываем функцию для вывода информации о студенте
+            displayStudentInfo(student);
+
+        </script>
+    </p>
+</body>
+</html>

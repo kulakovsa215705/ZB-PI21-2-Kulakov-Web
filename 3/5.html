@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Задание 5</title>
+</head>
+<body>
+	<p>
+        <h1>Пункт 1</h1>
+        <!-- Напишите функцию JavaScript, которая проверяет, является ли переданная строка палиндромом или нет. -->
+        <input type="text" id="inputText" placeholder="Введите слово">
+        <button onclick="checkPalindrome()">Проверить</button>
+        <p id="result"></p>
+        <script>
+            function checkPalindrome() {
+                // Получаем введенное слово
+                let inputText = document.getElementById('inputText').value;
+                // Удаляем пробелы и приводим к нижнему регистру
+                let cleanedText = inputText.replace(/\s/g, '').toLowerCase();
+                // Проверяем, является ли слово палиндромом
+                let isPalindrome = cleanedText === cleanedText.split('').reverse().join('');
+                // Выводим результат
+                document.getElementById('result').textContent = isPalindrome ? 'Палиндром' : 'Не палиндром';
+            }
+        </script>
+    </p>
+
+    <p>
+        <h1>Пункт 2</h1>
+        <!-- Заменить отрицательные элементы в числовом массиве из n чисел (n>10) их квадратами, оставив остальные без изменения. -->
+
+        <script>
+
+        </script>
+    </p>
+
+    <p>
+        <h1>Пункт 3</h1>
+        <!-- Создайте класс, который будет сохранять в переменную имя пользователя и выводить его на экран. Используйте его. -->
+
+        <script>
+
+        </script>
+    </p>
+
+    <p>
+        <h1>Пункт 4</h1>
+        <!-- Создайте класс, который переворачивает ваше имя. -->
+
+        <script>
+
+        </script>
+    </p>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Задание 4 пункт 4 подпункт 1</title>
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.25.0/babel.min.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        const { useState, useEffect, useMemo } = React;
+
+        function ButtonComponent() {
+            const [count, setCount] = useState(0);
+
+            // Аналог constructor и componentWillMount
+            useEffect(() => {
+                console.log('Component mounted');
+                return () => {
+                    console.log('Component will unmount');
+                };
+            }, []);
+
+            // Аналог shouldComponentUpdate
+            const shouldUpdate = useMemo(() => {
+                console.log('shouldComponentUpdate');
+                return true;
+            }, [count]);
+
+            // Аналог componentWillUpdate
+            useEffect(() => {
+                if (shouldUpdate) {
+                    console.log('componentWillUpdate');
+                }
+            }, [count, shouldUpdate]);
+
+            // Аналог componentDidUpdate
+            useEffect(() => {
+                console.log('componentDidUpdate');
+            }, [count]);
+
+            return (
+                <button onClick={() => setCount(count + 1)}>
+                    Нажато раз: {count}
+                </button>
+            );
+        }
+
+        ReactDOM.render(<ButtonComponent />, document.getElementById('root'));
+    </script>
+</body>
+</html>

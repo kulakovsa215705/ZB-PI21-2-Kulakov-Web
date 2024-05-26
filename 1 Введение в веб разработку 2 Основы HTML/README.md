@@ -1,1 +1,1 @@
-![Скриншот HTML-страницы](https://github.com/kulakovsa215705/ZB-PI21-2-Kulakov-Web/blob/main/1 Введение в веб разработку 2 Основы HTML/1.PNG)
+![Скриншот HTML-страницы](https://github.com/kulakovsa215705/ZB-PI21-2-Kulakov-Web/blob/main/1%20%D0%92%D0%B2%D0%B5%D0%B4%D0%B5%D0%BD%D0%B8%D0%B5%20%D0%B2%20%D0%B2%D0%B5%D0%B1%20%D1%80%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D1%83%202%20%D0%9E%D1%81%D0%BD%D0%BE%D0%B2%D1%8B%20HTML/1.PNG)

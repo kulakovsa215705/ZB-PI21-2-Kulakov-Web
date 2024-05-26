@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Задание 6</title>
+</head>
+<body>
+	<p>
+        <h1>Пункт 1</h1>
+        <!-- Реализуйте Калькулятор в виде стрелочных функций. -->
+
+        <input type="number" id="num1" placeholder="Введите первое число">
+        <input type="number" id="num2" placeholder="Введите второе число">
+        <select id="operationSelect">
+            <option value="add">Сложение</option>
+            <option value="subtract">Вычитание</option>
+            <option value="multiply">Умножение</option>
+            <option value="divide">Деление</option>
+        </select>
+        <button onclick="calculate()">Рассчитать</button>
+        <p id="result"></p>
+        <script>
+            const add = (a, b) => a + b;
+            const subtract = (a, b) => a - b;
+            const multiply = (a, b) => a * b;
+            const divide = (a, b) => a / b;
+
+            const calculate = () => {
+                const num1 = parseFloat(document.getElementById('num1').value);
+                const num2 = parseFloat(document.getElementById('num2').value);
+                const operation = document.getElementById('operationSelect').value;
+
+                let result;
+                switch (operation) {
+                    case 'add':
+                        result = add(num1, num2);
+                        break;
+                    case 'subtract':
+                        result = subtract(num1, num2);
+                        break;
+                    case 'multiply':
+                        result = multiply(num1, num2);
+                        break;
+                    case 'divide':
+                        if (num2!== 0) {
+                            result = divide(num1, num2);
+                        } else {
+                            result = 'Ошибка: деление на ноль';
+                        }
+                        break;
+                }
+
+                document.getElementById('result').innerText = `Результат: ${result}`;
+            };
+        </script>
+    </p>
+
+    <p>
+        <h1>Пункт 2</h1>
+        <!-- Используя Function Expression реализуйте проверку условий тестовых заданий. -->
+
+        <button onclick="checkTasksCorrect()">Проверить выполнение верных заданий</button>
+        <button onclick="checkTasksIncorrect()">Проверить выполнение неверных заданий</button>
+        <p id="taskCheckResult"></p>
+        <p id="taskCheckResult2"></p>
+        
+        <script>
+            
+            function UserException(message) {
+                this.message = message;
+                this.name = "Исключение, определённое пользователем";
+            }
+
+            const task1 = () => { };
+            const task2 = () => { };
+
+            const checkTasksCorrect = () => {
+                let result = "Все задания выполнены успешно.\n";
+
+                try {
+                    task1();
+                    task2();
+                } catch (error) {
+                    result = "Ошибка в одном из заданий:\n" + error.message;
+                }
+
+                document.getElementById('taskCheckResult').innerText = result;
+            };
+
+            const task3 = () => { throw new UserException("VeryBadError, try again"); };
+
+            const checkTasksIncorrect = () => {
+                let result = "Все задания выполнены успешно.\n";
+
+                try {
+                    task3();
+                } catch (error) {
+                    result = "Ошибка в одном из заданий:\n" + error.message;
+                }
+
+                document.getElementById('taskCheckResult2').innerText = result;
+            }
+        </script>
+    </p>
+
+    <p>
+        <h1>Пункт 3</h1>
+        <!-- Реализуйте в виде стрелочной функции функцию, проверяющую вашу фамилию на полиндром. -->
+
+        <input type="text" id="wordInput" placeholder="Введите слово">
+        <button onclick="checkPalindrome()">Проверить полиндром</button>
+        <p id="palindromeResult"></p>
+        <script>
+            const checkPalindrome = () => {
+                const word = document.getElementById('wordInput').value.toLowerCase();
+                const reversedWord = word.split('').reverse().join('');
+                
+                if (word === reversedWord) {
+                    document.getElementById('palindromeResult').innerText = `Слово "${word}" является полиндромом.`;
+                } else {
+                    document.getElementById('palindromeResult').innerText = `Слово "${word}" не является полиндромом.`;
+                }
+            };
+        </script>
+    </p>
+
+    <p>
+        <h1>Пункт 4</h1>
+        <!-- Реализуйте в виде стрелочной функции вычисление среднего значения данных в массиве. -->
+
+        <button onclick="calculateAverage()">Вычислить среднее значение</button>
+        <p id="arrayOutput"></p>
+        <p id="averageOutput"></p>
+        <script>
+            const generateRandomArray = () => {
+                const array = [];
+                for (let i = 0; i < 15; i++) {
+                    array.push(Math.floor(Math.random() * 41) - 10);
+                }
+                return array;
+            };
+
+            const calculateAverage = () => {
+                const array = generateRandomArray();
+                document.getElementById('arrayOutput').innerText = `Массив: ${array.join(', ')}`;
+
+                const sum = array.reduce((acc, val) => acc + val, 0);
+                const average = sum / array.length;
+
+                document.getElementById('averageOutput').innerText = `Среднее значение: ${average.toFixed(2)}`;
+            };
+        </script>
+    </p>
+
+    <p>
+        <h1>Пункт 5</h1>
+        <!-- В виде стрелочной функции реализуйте функцию, вычисляющую количество дней до нового года. -->
+
+        <input type="date" id="newYearDate" min="1970-01-01" max="2070-12-31">
+        <button onclick="countDaysToNewYear()">Подсчитать дни до нового года</button>
+        <p id="daysOutput"></p>
+        <script>
+            const countDaysToNewYear = () => {
+                const selectedDate = new Date(document.getElementById('newYearDate').value);
+                const newYear = new Date(selectedDate.getFullYear() + 1, 0, 1); // 0 - январь
+                const diffInMilliseconds = newYear.getTime() - selectedDate.getTime();
+                const diffInDays = Math.ceil(diffInMilliseconds / (1000 * 60 * 60 * 24));
+
+                document.getElementById('daysOutput').innerText = `До нового года осталось дней: ${diffInDays}`;
+            };
+        </script>
+    </p>
+
+    <p>
+        <h1>Пункт 6</h1>
+        <!-- Создайте пустую стрелочную функцию возвращает undefined -->
+
+        <button onclick="callEmptyFunction()">Вызвать пустую функцию</button>
+        <p id="outputEmpty"></p>
+        <script>
+            const callEmptyFunction = () => {
+                // Пустая стрелочная функция, которая ничего не делает и возвращает undefined
+                (() => {})();
+
+                // Выводим в консоль, чтобы было видно, что функция была вызвана
+                console.log("Пустая функция вызвана");
+            };
+        </script>
+    </p>
+
+    <p>
+        <h1>Пункт 7</h1>
+        <!-- Создайте массив и напишите стрелочные функции для него: суммирование всех элементов, выявить все четные, умножить каждый элемент на 2. -->
+
+        <button onclick="processArray()">Обработать массив</button>
+        <p id="generatedArray2"></p>
+        <p id="sum"></p>
+        <p id="evenDoubled"></p>
+        <script>
+            const generateRandomArray2 = () => {
+                const array = [];
+                for (let i = 0; i < 15; i++) {
+                    array.push(Math.floor(Math.random() * 41) - 10);
+                }
+                return array;
+            };
+
+            const sumArray = (arr) => arr.reduce((acc, val) => acc + val, 0);
+
+            const findEvenAndDouble = (arr) => arr.filter(num => num % 2 === 0).map(num => num * 2);
+
+            const processArray = () => {
+                const array = generateRandomArray();
+                document.getElementById('generatedArray2').innerText = `Сгенерированный массив: ${array.join(', ')}`;
+
+                const sum = sumArray(array);
+                document.getElementById('sum').innerText = `Сумма всех элементов: ${sum}`;
+
+                const evenDoubled = findEvenAndDouble(array);
+                document.getElementById('evenDoubled').innerText = `Четные числа, умноженные на 2: ${evenDoubled.join(', ')}`;
+            };
+        </script>
+    </p>
+
+    <p>
+        <h1>Пункт 8</h1>
+        <!-- Создайте массив с e-mail. Организуйте фильтр на странице html по названию почты. -->
+
+        <input type="text" id="emailFilter" placeholder="Введите часть e-mail для фильтрации">
+        <button onclick="filterEmails()">Фильтрация e-mail</button>
+        <ul id="emailList"></ul>
+        <script>
+            const emails = [
+                "aaa1@example.com",
+                "aa2@example.com",
+                "bbbbb3@example.com",
+                "aab4@example.com",
+                "c5@example.com"
+            ];
+
+            const filterEmails = () => {
+                const filterText = document.getElementById('emailFilter').value.toLowerCase();
+                const list = document.getElementById('emailList');
+                list.innerHTML = ''; // Очищаем список перед фильтрацией
+
+                emails.forEach(email => {
+                    if (email.toLowerCase().includes(filterText)) {
+                        const listItem = document.createElement('li');
+                        listItem.textContent = email;
+                        list.appendChild(listItem);
+                    }
+                });
+            };
+        </script>
+    </p>
+</body>
+</html>

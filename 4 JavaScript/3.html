@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Задание 3</title>
+</head>
+<body>
+    <p>
+        <h1>Пункты 1-3</h1>
+        <!-- Сформировать массив из 15 целых чисел, выбранных случайным образом из интервала [-10, 30]. Найти среднее арифметическое положительных элементов.
+        Заменить отрицательные элементы в числовом массиве из n чисел (n>10) их квадратами, оставив остальные без изменения.
+        В заданном массиве найти среднее арифметическое положительных чисел, среднее арифметическое отрицательных чисел и число нулей. -->
+        <input type="number" id="n" placeholder="Введите число n">
+        <button onclick="generateArray()">Запустить скрипт</button>
+        <div id="result"></div>
+        <script>
+            function generateArray() {
+                // Получаем значение n из поля ввода
+                const n = document.getElementById('n').value;
+                // Генерируем массив из n случайных чисел
+                let array = Array.from({length: n}, () => Math.floor(Math.random() * 41) - 10);
+                // Вычисляем среднее арифметическое положительных чисел
+                let positiveSum = 0;
+                let positiveCount = 0;
+                // Вычисляем среднее арифметическое отрицательных чисел
+                let negativeSum = 0;
+                let negativeCount = 0;
+                // Подсчитываем количество нулей
+                let zeroCount = 0;
+                // Проходим по массиву
+                for (let i = 0; i < array.length; i++) {
+                    if (array[i] > 0) {
+                        positiveSum += array[i];
+                        positiveCount++;
+                    } else if (array[i] < 0) {
+                        negativeSum += array[i];
+                        negativeCount++;
+                    } else {
+                        zeroCount++;
+                    }
+                }
+                // Вычисляем среднее арифметическое
+                const positiveAverage = positiveCount ? positiveSum / positiveCount : 0;
+                const negativeAverage = negativeCount ? negativeSum / negativeCount : 0;
+                // Заменяем отрицательные числа на их квадраты
+                newArray = array.map(x => x < 0 ? x * x : x);
+                // Выводим результаты
+                document.getElementById('result').innerHTML = `
+                    Массив: ${array.join(', ')}<br>
+                    Среднее арифметическое положительных чисел: ${positiveAverage}<br>
+                    Среднее арифметическое отрицательных чисел: ${negativeAverage}<br>
+                    Количество нулей: ${zeroCount}<br>
+                    Обновленный массив: ${newArray.join(', ')}`;
+            }
+        </script>
+    </p>
+
+    <p>
+        <h1>Пункт 4</h1>
+        <!-- Организовать симулятор, который выдает только три случайных значения – красный, черный и белый (0, 1, 2). 
+            Запустить симуляцию 1 000 000 раз. Узнать, какое максимальное число раз выпадало красное значение. -->
+        
+            <button onclick="runSimulation()">Запустить симуляцию</button>
+            <div id="result2"></div>
+            <script>
+                function runSimulation() {
+                    let maxRedCount = 0;
+                    for (let i = 0; i < 1000000; i++) {
+                        let redCount = 0;
+                        for (let j = 0; j < 500; j++) {
+                            const color = Math.floor(Math.random() * 3);
+                            if (color === 0) {
+                                redCount++;
+                            }
+                        }
+                        if (redCount > maxRedCount) {
+                            maxRedCount = redCount;
+                        }
+                    }
+                    document.getElementById('result2').innerHTML = `
+                        Максимальное количество выпавших красных значений в выборке из 500 элементов: ${maxRedCount}
+                    `;
+                }
+            </script>
+    </p>
+</body>
+</html>

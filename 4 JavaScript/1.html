@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Задание 1</title>
+</head>
+<body>
+	<h1>Пункт 1</h1>
+	<!-- Попросите пользователя ввести любое число и сохраните его в переменную. -->
+    <input type="text" placeholder="Введите число..." id="task1_input1"> <!-- Поле ввода числа -->
+    <button type="button" onclick="task1_getValue();">Показать число</button> <!-- Кнопка запуска функции -->
+    <p id="task1_output1"></p> <!-- Элемент для вывода числа -->
+    
+    <script>
+        function task1_getValue(){
+            // Получаем значение из поля ввода
+            var task1_output1 = document.getElementById("task1_input1").value;
+            
+            // Выводим значение в элемент с id="task1_output1"
+            document.getElementById("task1_output1").innerHTML = "Вы ввели число: " + task1_output1;
+        }
+    </script>
+	
+	<h1>Пункт 2</h1>
+	<!-- Создайте калькулятор, который будет выполнять все арифметические операции над любыми введенными пользователем двумя числами. -->
+	<input type="text" placeholder="Введите первое число..." id="task1_input2">
+    <input type="text" placeholder="Введите второе число..." id="task1_input3">
+    <select id="task1_operation">
+        <option value="+">Сложение</option>
+        <option value="-">Вычитание</option>
+        <option value="*">Умножение</option>
+        <option value="/">Деление</option>
+    </select>
+    <button type="button" onclick="task1_getCalculations();">Выполнить операцию</button>
+    <p id="task1_output2"></p>
+    
+    <script>
+        function task1_getCalculations(){
+            // Получаем значения из полей ввода
+            var num1 = parseFloat(document.getElementById("task1_input2").value);
+            var num2 = parseFloat(document.getElementById("task1_input3").value);
+            var task1_operation = document.getElementById("task1_operation").value;
+            
+            var result;
+            switch(task1_operation) {
+                case '+':
+                    result = num1 + num2;
+                    break;
+                case '-':
+                    result = num1 - num2;
+                    break;
+                case '*':
+                    result = num1 * num2;
+                    break;
+                case '/':
+                    if (num2 != 0) {
+                        result = num1 / num2;
+                    } else {
+                        result = "Деление на ноль невозможно";
+                    }
+                    break;
+                default:
+                    result = "Неизвестная операция";
+            }
+            
+            // Выводим результат
+            document.getElementById("task1_output2").innerHTML = "Результат: " + result;
+        }
+    </script>
+	
+	<h1>Пункт 3</h1>
+	<!-- Необходимо попросить пользователя задумать число. 
+	Затем он должен умножить это число на 2 и прибавить к полученному результату 7. 
+	То, что вышло в итоге, нужно ввести поле. 
+	Вы должны выдать пользователю, какое число он задумал. -->
+    <input type="text" placeholder="Введите результат умножения на 2 и прибавления 7..." id="task1_input4">
+    <button type="button" onclick="task1_getGuess();">Угадай число</button>
+    <p id="task1_output3"></p>
+		
+	<script>
+		function task1_getGuess(){
+            // Получаем значения из полей ввода
+            var finalNumber = parseFloat(document.getElementById("task1_input4").value);
+            
+            // Вычисляем исходное число
+            var originalNumber = (finalNumber - 7) / 2;
+            
+            // Вывод числа
+			document.getElementById("task1_output3").innerHTML = "Вы загадали число " + originalNumber;
+        }
+	</script>
+	
+	<h1>Пункт 4</h1>
+	<!-- Получите сначала имя пользователя, затем год его рождения и сохраните в 2 переменные. 
+	Вычислите возраст пользователя, и выведите его в абзаце в таком формате "Антон: 24". -->
+	<input type="text" placeholder="Введите имя..." id="task1_input5">
+    <input type="date" placeholder="Введите год рождения..." id="task1_input6">
+    <button type="button" onclick="calculateAge();">Вычислить возраст</button>
+    <p id="task1_output4"></p>
+	
+	<script>
+        function calculateAge(){
+            // Получаем значения из полей ввода
+            var name = document.getElementById("task1_input5").value;
+            var birthDate = new Date(document.getElementById("task1_input6").value);
+            var currentDate = new Date();
+            
+            // Вычисляем возраст
+			var age = currentDate.getFullYear() - birthDate.getFullYear();
+			if (currentDate.getDate() < birthDate.getDate()) {
+				age--;
+			}
+            
+            // Выводим результат
+            document.getElementById("task1_output4").innerHTML = name + ": " + age;
+        }
+    </script>
+		
+</body>
+</html>

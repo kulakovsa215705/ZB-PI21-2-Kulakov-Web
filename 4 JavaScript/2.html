@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Задание 2</title>
+</head>
+<body>
+    <p>
+        <h1>Пункт 1</h1>  
+        <!-- Напишите программу на Java Script, которая считает от 1 до 10. -->
+        <button id="startButton">Начать счёт</button>
+        <p id="counter"></p>
+        <script>
+            let i = 1;
+            function count() {
+                if (i <= 10) {
+                    document.getElementById('counter').innerHTML += i + " ";
+                    i++;
+                    setTimeout(count, 500); // Задержка в 0.5 секунды
+                }
+            }
+            document.getElementById("startButton").onclick = function() {
+                count(); // Запуск счетчика при нажатии на кнопку
+            };
+        </script>
+    </p>
+
+    <p>
+        <h1>Пункт 2</h1>
+        <!-- Создайте программу для застолий, которая будет предлагать «Еще по одной?» пока пользователь не введет единицу. -->
+        <button id="startDrinking">Начать пить</button>
+        <script>
+            document.getElementById("startDrinking").onclick = function() {
+                let answer = prompt("Еще по одной? (введите 1 для остановки)");
+                while (answer != "1") {
+                    answer = prompt("Еще по одной? (введите 1 для остановки)");
+                }
+            };
+        </script>
+    </p>
+    
+    <p>
+        <h1>Пункт 3</h1>
+        <!-- Вычислите факториал числа (вашего порядкового номера в журнале). (10) -->
+        <p id="result"></p>
+        <script>
+            let number = 10; // Факториал числа 10
+            let factorial = 1;
+            for (let i = 1; i <= number; i++) {
+                factorial *= i;
+            }
+            // Выбираем элемент с id "result"
+            var element = document.getElementById("result");
+            // Выводим результат вычисления факториала в HTML
+            element.innerHTML = "Факториал числа 10 равен: " + factorial;
+        </script>
+    </p>
+    
+    <p>
+        <h1>Пункт 4</h1>
+        <!-- Напишите программу, которая проверяет вашу фамилию на палиндром. -->
+        <input type="text" id="wordInput" placeholder="Введите слово">
+        <button onclick="checkPalindrome()">Проверить на палиндром</button>
+        <p id="result2"></p>
+        <script>
+            function checkPalindrome() {
+                let word = document.getElementById('wordInput').value.toLowerCase();
+                let reversedWord = word.split('').reverse().join('');
+                let resultElement = document.getElementById('result2');
+                if (word === reversedWord) {
+                    resultElement.innerHTML = "Слово является палиндромом.";
+                } else {
+                    resultElement.innerHTML = "Слово не является палиндромом.";
+                }
+            }
+        </script>
+    </p>
+    
+    <p>
+        <h1>Пункт 5</h1>
+        <!-- Выведите все простые числа от 1 до вашего порядкового номера в журнале. -->
+        <p id="primeNumbers"></p>
+        <script>
+            let primeNumbers = [];
+            for (let i = 2; i <= 10; i++) {
+                let isPrime = true;
+                for (let j = 2; j < i; j++) {
+                    if (i % j === 0) {
+                        isPrime = false;
+                        break;
+                    }
+                }
+                if (isPrime) {
+                    primeNumbers.push(i);
+                }
+            }
+            document.getElementById('primeNumbers').innerHTML = "Простые числа от 1 до 10: " + primeNumbers.join(', ');
+        </script>
+    </p>
+</body>
+</html>

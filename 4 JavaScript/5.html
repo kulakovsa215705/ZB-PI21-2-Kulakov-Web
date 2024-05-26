@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Задание 5</title>
+</head>
+<body>
+	<p>
+        <h1>Пункт 1</h1>
+        <!-- Напишите функцию JavaScript, которая проверяет, является ли переданная строка палиндромом или нет. -->
+        <input type="text" id="inputText" placeholder="Введите слово">
+        <button onclick="checkPalindrome()">Проверить</button>
+        <p id="result"></p>
+        <script>
+            function checkPalindrome() {
+                // Получаем введенное слово
+                let inputText = document.getElementById('inputText').value;
+                // Удаляем пробелы и приводим к нижнему регистру
+                let cleanedText = inputText.replace(/\s/g, '').toLowerCase();
+                // Проверяем, является ли слово палиндромом
+                let isPalindrome = cleanedText === cleanedText.split('').reverse().join('');
+                // Выводим результат
+                document.getElementById('result').textContent = isPalindrome ? 'Палиндром' : 'Не палиндром';
+            }
+        </script>
+    </p>
+
+    <p>
+        <h1>Пункт 2</h1>
+        <!-- Заменить отрицательные элементы в числовом массиве из n чисел (n>10) их квадратами, оставив остальные без изменения. -->
+        <input type="number" id="nInput" placeholder="Введите число n">
+        <button onclick="generateArray()">Сгенерировать массив</button>
+        <p id="originalArray"></p>
+        <p id="processedArray"></p>
+        <script>
+            function generateArray() {
+                const n = document.getElementById('nInput').value;
+                const originalArray = [];
+                for (let i = 0; i < n; i++) {
+                    originalArray.push(Math.floor(Math.random() * 41) - 10);
+                }
+                document.getElementById('originalArray').innerText = originalArray.join(', ');
+
+                const processedArray = originalArray.map(num => num < 0 ? num * num : num);
+                document.getElementById('processedArray').innerText = processedArray.join(', ');
+            }
+        </script>
+    </p>
+
+    <p>
+        <h1>Пункт 3</h1>
+        <!-- Создайте класс, который будет сохранять в переменную имя пользователя и выводить его на экран. Используйте его. -->
+        <input type="text" id="userNameInput" placeholder="Введите имя пользователя">
+        <button onclick="saveUserName()">Сохранить имя</button>
+        <p id="userNameOutput"></p>
+        <script>
+            class User {
+                constructor(name) {
+                    this.name = name;
+                }
+            }
+
+            function saveUserName() {
+                const userName = document.getElementById('userNameInput').value;
+                const user = new User(userName);
+                document.getElementById('userNameOutput').innerText = `Имя пользователя: ${user.name}`;
+            }
+        </script>
+    </p>
+
+    <p>
+        <h1>Пункт 4</h1>
+        <!-- Создайте класс, который переворачивает ваше имя. -->
+        <input type="text" id="wordInput" placeholder="Введите слово">
+        <button onclick="reverseWord()">Перевернуть слово</button>
+        <p id="reversedWordOutput"></p>
+        <script>
+            class WordReverser {
+                constructor(word) {
+                    this.word = word;
+                }
+
+                reverse() {
+                    return this.word.split('').reverse().join('');
+                }
+            }
+
+            function reverseWord() {
+                const word = document.getElementById('wordInput').value;
+                const reverser = new WordReverser(word);
+                document.getElementById('reversedWordOutput').innerText = `Перевернутое слово: ${reverser.reverse()}`;
+            }
+        </script>
+    </p>
+</body>
+</html>

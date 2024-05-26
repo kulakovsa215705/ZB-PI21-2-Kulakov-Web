@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Задание 7</title>
+</head>
+<body>
+	<p>
+        <h1>Пункт 1</h1>
+        <!-- 
+            Имеется массив const arr1 = [1, 2, 3];
+            С помощью функции map() необходимо увеличить каждый элемент массива на 10 и умножить полученное число на 3.
+         -->
+        <input type="button" value="Произвести операции" onclick="processArray()">
+        <p id="result1"></p>
+        <script>
+            const arr1 = [1, 2, 3];
+
+            function processArray() {
+                const result1 = arr1.map(function(item) {
+                    return (item + 10) * 3;
+                });
+
+                document.getElementById('result1').textContent = result1.join(', ');
+            }
+    </script>
+    </p>
+
+    <p>
+        <h1>Пункт 2</h1>
+        <!-- Имеется массив «год рождения». Необходимо вывести их возраст. -->
+
+        <input type="button" value="Сгенерировать и вывести" onclick="generateAndDisplay()">
+        <p id="birthYears"></p>
+        <p id="ages"></p>
+        <script>
+            function generateAndDisplay() {
+                const currentYear = new Date().getFullYear();
+                const birthYears = Array.from({length: 10}, () => Math.floor(Math.random() * 100) + 1900);
+
+                document.getElementById('birthYears').textContent = birthYears.join(', ');
+
+                const ages = birthYears.map(year => currentYear - year);
+                document.getElementById('ages').textContent = ages.join(', ');
+            }
+        </script>
+        
+    </p>
+
+    <p>
+        <h1>Пункт 3</h1>
+        <!-- Реализуйте проверку по условию на право редактирования сайта и вывод имени админа. -->
+
+        <select id="personSelect"></select>
+        <input type="button" value="Проверить право на редактирование" onclick="checkEditRights()">
+        <input type="button" value="Найти админа" onclick="findAdmin()">
+        <p id="result3"></p>
+        <script>
+            const people = [
+                {name: 'Иван', role: 'админ'},
+                {name: 'Петр', role: 'модератор'},
+                {name: 'Сергей', role: 'пользователь'},
+                {name: 'Мария', role: 'модератор'},
+                {name: 'Дмитрий', role: 'пользователь'},
+                {name: 'Алексей', role: 'модератор'},
+                {name: 'Владимир', role: 'пользователь'}
+            ];
+
+            window.onload = function() {
+                const select = document.getElementById('personSelect');
+                people.forEach(person => {
+                    const option = document.createElement('option');
+                    option.text = `${person.name} (${person.role})`;
+                    option.value = person.name;
+                    select.add(option);
+                });
+            };
+
+            function checkEditRights() {
+                const selectedPerson = document.getElementById('personSelect').value;
+                const person = people.find(p => p.name === selectedPerson);
+                if (person && (person.role === 'админ' || person.role === 'модератор')) {
+                    document.getElementById('result3').textContent = `${person.name} может редактировать сайт.`;
+                } else {
+                    document.getElementById('result3').textContent = `${selectedPerson} не может редактировать сайт.`;
+                }
+            }
+
+            function findAdmin() {
+                const admin = people.find(p => p.role === 'админ');
+                if (admin) {
+                    document.getElementById('result3').textContent = `Админ: ${admin.name}`;
+                } else {
+                    document.getElementById('result3').textContent = 'Админ не найден.';
+                }
+            }
+        </script>
+    </p>
+
+    <p>
+        <h1>Пункт 4</h1>
+        <!-- 
+            Используя синтаксис:
+            const sum = arr.reduce(function(accumulator, currentValue) {
+            return accumulator + currentValue;
+            });
+            Вычислите средний балл студентов.
+         -->
+        <input type="button" value="Вычислить средний балл" onclick="calculateAverageScore()">
+        <p id="result4"></p>
+        <p id="averageScore"></p>
+        <script>
+            const scores = [5, 4, 5, 3, 4, 5, 4, 3, 5, 4];
+            document.getElementById('result4').textContent = scores;
+            function calculateAverageScore() {
+                const sum = scores.reduce(function(accumulator, currentValue) {
+                    return accumulator + currentValue;
+                }, 0); // Инициализируем аккумулятор значением 0
+
+                const average = sum / scores.length;
+                document.getElementById('averageScore').textContent = `Средний балл: ${average.toFixed(2)}`;
+            }
+        </script>
+        
+    </p>
+
+    <p>
+        <h1>Пункт 5</h1>
+        <!-- Используя синтаксис, создайте собственную функцию высшего порядка, которая из заданного массива возвращает массив, 
+            состоящий из нулей (для тех элементов длинна которых меньше либо равна 3) и единиц (в другом случае). 
+        -->
+        <input type="button" value="Преобразовать массив" onclick="transformArray()">
+        <p id="strArray"></p>
+        <p id="transformedArray"></p>
+        <script>
+            const strArray = ['JavaScript', 'Python', 'PHP', 'Java', 'C'];
+            document.getElementById('strArray').textContent = strArray;
+            function mapForEach(arr, fn) {
+                const newArray = [];
+                for(let i = 0; i < arr.length; i++) {
+                    newArray.push(fn(arr[i]));
+                }
+                return newArray;
+            }
+
+            function transformArray() {
+                const transformedArray = mapForEach(strArray, function(item) {
+                    return item.length <= 3 ? 0 : 1;
+                });
+
+                document.getElementById('transformedArray').textContent = transformedArray.join(', ');
+            }
+        </script>
+        
+    </p>
+</body>
+</html>
